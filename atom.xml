@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Ayush Dwivedi</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://aydwi.com/"/>
+  <updated>2018-03-10T15:36:21.822Z</updated>
+  <id>http://aydwi.com/</id>
+  
+  <author>
+    <name>Ayush Dwivedi</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Saying Hello!</title>
+    <link href="http://aydwi.com/2018/03/10/sayinghello/"/>
+    <id>http://aydwi.com/2018/03/10/sayinghello/</id>
+    <published>2018-03-10T16:13:07.578Z</published>
+    <updated>2018-03-10T15:36:21.822Z</updated>
+    
+    <content type="html"><![CDATA[<p>Although I have a lot of things in mind to write about, I’ll begin with a <code>whoami</code> post. I’m Ayush, a Computer Science student, currently in 3rd year of my studies towards a bachelor’s degree in engineering.</p><p>I write code in <strong>Python</strong> and <strong>C++</strong> for the most part. Occasionally I work with <strong>JavaScript</strong> and <strong>Shell</strong>. Meanwhile, I’m also gaining familiarity with <strong>Rust</strong>. This is the place where I’ll try to document my thoughts, workflow and some (hopefully) interesting things that I experience while programming.</p><p>As of now, I’m focusing on my proposal for <a href="https://summerofcode.withgoogle.com/" target="_blank" rel="noopener"><strong>Google Summer of Code</strong></a> 2018 with <a href="https://www.python.org/psf/" target="_blank" rel="noopener">Python Software Foundation</a>. The application process begins in 2 days from now, and I intend to submit my proposal within the first few days.</p><p>If for some reason, you wish to contact me, message me on <a href="http://telegram.me/itsayushdwivedi" target="_blank" rel="noopener">Telegram</a> or <a href="http://keybase.io/aydwi" target="_blank" rel="noopener">Keybase</a> chat, or you can find me on <a href="http://twitter.com/aydwiv" target="_blank" rel="noopener">Twitter</a>, even though I rarely use it.</p><p>That’s all for now, but I hope to post again soon.</p><p><code>:wq</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Although I have a lot of things in mind to write about, I’ll begin with a &lt;code&gt;whoami&lt;/code&gt; post. I’m Ayush, a Computer Science student
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
