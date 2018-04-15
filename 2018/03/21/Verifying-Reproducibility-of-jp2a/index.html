@@ -13,7 +13,7 @@
 <meta property="og:url" content="http://aydwi.com/2018/03/21/Verifying-Reproducibility-of-jp2a/index.html">
 <meta property="og:site_name" content="Ayush Dwivedi">
 <meta property="og:description" content="Reproducible BuildsA software build is reproducible if using the same source code and by following the same build instructions in a specific build environment, bit-by-bit identical copies of expected">
-<meta property="og:updated_time" content="2018-03-21T05:13:59.799Z">
+<meta property="og:updated_time" content="2018-04-15T00:46:23.331Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Verifying Reproducibility of jp2a">
 <meta name="twitter:description" content="Reproducible BuildsA software build is reproducible if using the same source code and by following the same build instructions in a specific build environment, bit-by-bit identical copies of expected">
@@ -137,7 +137,7 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">FROM debian:9.4</span><br><span class="line">LABEL author=<span class="string">"Ayush Dwivedi &lt;itsayushdwivedi@gmail.com&gt;"</span></span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">    make \</span><br><span class="line">    automake \</span><br><span class="line">    autoconf \</span><br><span class="line">    build-essential \</span><br><span class="line">    git-core \</span><br><span class="line">    gcc \</span><br><span class="line">    libcurl4-openssl-dev \</span><br><span class="line">    libjpeg-dev \</span><br><span class="line">    libncurses5-dev</span><br><span class="line">RUN mkdir build</span><br><span class="line">WORKDIR build</span><br><span class="line">RUN git <span class="built_in">clone</span> -b reproducibility-test https://github.com/aydwi/jp2a.git</span><br><span class="line">WORKDIR jp2a</span><br><span class="line">RUN autoreconf -vi</span><br><span class="line">RUN ./configure --with-jpeg-prefix=/usr/<span class="built_in">local</span> \</span><br><span class="line">    --with-curl-config=`<span class="built_in">which</span> curl-config`</span><br><span class="line">RUN make -j</span><br></pre></td></tr></table></figure>
 <p>It starts from a base image (Debian Stretch), installs required dependencies, <strong>specifies a fixed build path</strong>, gets the source code via <code>git clone</code>, and then follows the instructions required to compile from source. The image created by this <code>Dockerfile</code> contains the binary (named <strong>jp2a</strong>) inside <code>/build/jp2a/src/</code>.</p>
 <p>We wish to verify the integrity of this binary primarily, because the <code>.deb</code> archive of the library is just this binary packaged in a format specified by Debian.</p>
-<h2 id="How-to-Run"><a href="#How-to-Run" class="headerlink" title="How to Run"></a>How to Run</h2><p>These instructions are for a UNIX-like system. Make sure Docker is installed.</p>
+<h2 id="How-to-Run"><a href="#How-to-Run" class="headerlink" title="How to Run"></a>How to Run</h2><p>Make sure Docker is installed.</p>
 <ol>
 <li><p>Create a <code>Dockerfile</code>, preferably in a new directory, using the contents mentioned in the previous section.</p>
 </li>
@@ -154,7 +154,7 @@
 </ol>
 <h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p>The SHA-256 hash, obtained after each of the several different test runs is - <code>6c50c4bef3fcac2a5e777d85c587c2653d9d1672195d3e9666efe89575ed1769  jp2a</code></p>
 <p>This process can be followed on your own machine, and the obtained hash should match this value. It will further confirm that this binary is indeed reproducible.</p>
-<p>If the build path is changed, the two separate binaries most certainly will not give identical hash values, and thus output will not remain reproducible. Setting different flags during compilation can also lead to the same situation. Such differences can be identified with the tool <code>diffoscope</code>, and wherever possible, be worked upon. </p>
+<p>If the build path is changed, the two separate binaries will not give identical hash values, and thus output will not remain reproducible. Setting different flags during compilation can also lead to the same situation. Such differences can be identified with the tool <code>diffoscope</code>, and wherever possible, be worked upon. </p>
 <p>As of now, <strong>jp2a</strong> can be built reproducibly in a deterministic build environment.</p>
 
   </div>
