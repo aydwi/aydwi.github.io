@@ -13,7 +13,7 @@
 <meta property="og:url" content="http://aydwi.com/2018/03/21/Verifying-Reproducibility-of-jp2a/index.html">
 <meta property="og:site_name" content="Ayush Dwivedi">
 <meta property="og:description" content="Reproducible BuildsA software build is reproducible if using the same source code and by following the same build instructions in a specific build environment, bit-by-bit identical copies of expected">
-<meta property="og:updated_time" content="2018-04-22T01:55:01.755Z">
+<meta property="og:updated_time" content="2018-07-29T22:50:18.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Verifying Reproducibility of jp2a">
 <meta name="twitter:description" content="Reproducible BuildsA software build is reproducible if using the same source code and by following the same build instructions in a specific build environment, bit-by-bit identical copies of expected">
@@ -56,7 +56,7 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Blog</a></li>
          
           <li><a href="http://github.com/aydwi">Projects</a></li>
          
@@ -69,7 +69,7 @@
       <ul>
         
         
-        <li><a class="icon" href="/2018/03/10/sayinghello/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2018/03/10/Saying-Hello/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -134,7 +134,7 @@
 <h2 id="jp2a"><a href="#jp2a" class="headerlink" title="jp2a"></a>jp2a</h2><p><strong>jp2a</strong> is a JPEG to ASCII conversion library written in C. I’ve used it in an Image Processing project, and for some other fun stuff. Its source code can be found <a href="https://github.com/cslarsen/jp2a" target="_blank" rel="noopener">here</a>. It is listed as a reproducible package by <strong>Reproducible Builds</strong> <a href="https://tests.reproducible-builds.org/debian/rb-pkg/stretch/amd64/jp2a.html" target="_blank" rel="noopener">here</a>.</p>
 <p>But how do we determine that ourselves? The solution is to build the software in a deterministic build environment, and verify that the binary it produces has the same cryptographic checksum when built at different times, on different machines by different people.</p>
 <h2 id="The-Build-Environment"><a href="#The-Build-Environment" class="headerlink" title="The Build Environment"></a>The Build Environment</h2><p>It is important to create a build environment for the process, that can be set-up again with ease, and does not introduce any sources of indeterminism. Containers are an excellent choice for this purpose. Here, I set up a Docker container to build <strong>jp2a</strong> from source. The <code>Dockerfile</code> to create the image is</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">FROM debian:9.4</span><br><span class="line">LABEL author=<span class="string">"Ayush Dwivedi"</span></span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">    make \</span><br><span class="line">    automake \</span><br><span class="line">    autoconf \</span><br><span class="line">    build-essential \</span><br><span class="line">    git-core \</span><br><span class="line">    gcc \</span><br><span class="line">    libcurl4-openssl-dev \</span><br><span class="line">    libjpeg-dev \</span><br><span class="line">    libncurses5-dev</span><br><span class="line">RUN mkdir build</span><br><span class="line">WORKDIR build</span><br><span class="line">RUN git <span class="built_in">clone</span> -b reproducibility-test https://github.com/aydwi/jp2a.git</span><br><span class="line">WORKDIR jp2a</span><br><span class="line">RUN autoreconf -vi</span><br><span class="line">RUN ./configure --with-jpeg-prefix=/usr/<span class="built_in">local</span> \</span><br><span class="line">    --with-curl-config=`<span class="built_in">which</span> curl-config`</span><br><span class="line">RUN make -j</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">FROM debian:9.4</span><br><span class="line">LABEL author=&quot;Ayush Dwivedi&quot;</span><br><span class="line">RUN apt-get update &amp;&amp; apt-get install -y \</span><br><span class="line">    make \</span><br><span class="line">    automake \</span><br><span class="line">    autoconf \</span><br><span class="line">    build-essential \</span><br><span class="line">    git-core \</span><br><span class="line">    gcc \</span><br><span class="line">    libcurl4-openssl-dev \</span><br><span class="line">    libjpeg-dev \</span><br><span class="line">    libncurses5-dev</span><br><span class="line">RUN mkdir build</span><br><span class="line">WORKDIR build</span><br><span class="line">RUN git clone -b reproducibility-test https://github.com/aydwi/jp2a.git</span><br><span class="line">WORKDIR jp2a</span><br><span class="line">RUN autoreconf -vi</span><br><span class="line">RUN ./configure --with-jpeg-prefix=/usr/local \</span><br><span class="line">    --with-curl-config=`which curl-config`</span><br><span class="line">RUN make -j</span><br></pre></td></tr></table></figure>
 <p>It starts from a base image (Debian Stretch), installs required dependencies, <strong>specifies a fixed build path</strong>, gets the source code via <code>git clone</code>, and then follows the instructions required to compile from source. The image created by this <code>Dockerfile</code> contains the binary (named <strong>jp2a</strong>) inside <code>/build/jp2a/src/</code>.</p>
 <p>We wish to verify the integrity of this binary primarily, because the <code>.deb</code> archive of the library is just this binary packaged in a format specified by Debian.</p>
 <h2 id="How-to-Run"><a href="#How-to-Run" class="headerlink" title="How to Run"></a>How to Run</h2><p>Make sure Docker is installed.</p>
@@ -172,7 +172,7 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Blog</a></li>
          
           <li><a href="http://github.com/aydwi">Projects</a></li>
          
@@ -216,7 +216,7 @@
          
           <li><a href="/">Home</a></li>
          
-          <li><a href="/archives/">Writing</a></li>
+          <li><a href="/archives/">Blog</a></li>
          
           <li><a href="http://github.com/aydwi">Projects</a></li>
          
