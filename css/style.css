@@ -1224,7 +1224,13 @@ article .content .caption {
   color: #666;
 }
 #footer a:hover {
-  color: #858585;
+  color: #a3a3a3;
+}
+#footer a:hover,
+#footer a:visited,
+#footer a:link,
+#footer a:active {
+  text-decoration: none;
 }
 #footer .footer-left {
   height: 20px;
