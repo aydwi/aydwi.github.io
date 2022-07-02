@@ -44,19 +44,23 @@ table {
   line-height: 1.5em;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding-right: 20px;
   vertical-align: top;
 }
 
-table td, td {
+table td,
+td {
   border-spacing: none;
   border-style: solid;
   padding: 10px 15px;
   border-width: 1px 0 0 0;
 }
-thead th, th {
+
+thead th,
+th {
   text-align: left;
   padding: 10px 15px;
   height: 20px;
@@ -81,29 +85,35 @@ h2,
 h3 {
   font-weight: 400;
 }
+
 p {
   margin-block-start: 1.5em;
   margin-block-end: 1.5em;
 }
+
 p,
 pre {
   word-break: normal;
   overflow-wrap: anywhere;
 }
+
 .markdown-image img {
   max-width: 100%;
 }
-.anchor { 
-  font-size: 100%; 
-  visibility: hidden; 
-  color:silver;
+
+.anchor {
+  font-size: 100%;
+  visibility: hidden;
+  color: silver;
 }
+
 h1:hover a,
 h2:hover a,
 h3:hover a,
-h4:hover a { 
+h4:hover a {
   visibility: visible
 }
+
 .highlight pre {
   padding: 7px;
   overflow-x: auto;
@@ -113,6 +123,7 @@ h4:hover a {
   max-width: 100%;
   overflow-x: auto;
 }
+
 p code {
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
   font-size: inherit;
@@ -124,6 +135,7 @@ p code {
   word-wrap: break-word;
   text-indent: 0;
 }
+
 pre code {
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
 }
@@ -149,6 +161,7 @@ nav.navigation a {
   line-height: 1.35;
   border-radius: 3px;
 }
+
 nav.navigation a:hover {
   color: #0366d6;
 }
@@ -158,6 +171,7 @@ nav.navigation a.button {
   color: #fff;
   margin-left: 12px;
 }
+
 @media (max-width: 700px) {
   nav.navigation {
     padding: 20px 10px 0 0;
@@ -167,6 +181,7 @@ nav.navigation a.button {
     text-align: right;
     z-index: 100;
   }
+
   nav.navigation a {
     top: 8px;
     right: 6px;
@@ -192,17 +207,21 @@ nav.navigation a.button {
   padding: 10px 7px;
   margin-top: 36px;
 }
+
 .toc details summary {
   cursor: zoom-in;
   margin-inline-start: 14px;
   font-weight: 500;
 }
+
 .toc details[open] summary {
   cursor: zoom-out;
 }
+
 .toc #TableOfContents {
   margin-left: 10px;
 }
+
 .toc ul {
   padding-inline-start: 24px;
 }
@@ -220,21 +239,26 @@ nav.navigation a.button {
   color: #bbbbbb;
   font-size: 14px;
 }
+
 #footer .copyright {
   margin: 20px auto;
   font-size: 15px;
 }
+
 .powerby {
   margin: 20px auto;
   font-size: 13px;
 }
+
 #footer .split {
   cursor: pointer;
 }
+
 #footer .split:hover path {
   fill: #ff3356;
   transition: 0.7s ease-out;
-  cursor: pointer;;
+  cursor: pointer;
+  ;
 }
 
 #social a {
@@ -347,6 +371,7 @@ nav.navigation a.button {
 #list-page .pagination .pre {
   float: left;
 }
+
 #list-page .pagination .next {
   float: right;
 }
@@ -370,6 +395,7 @@ nav.navigation a.button {
     padding: 0 18px;
     margin: 20px auto 0 auto;
   }
+
   #single .title {
     font-size: 24px;
     line-height: 32px;
@@ -382,6 +408,7 @@ nav.navigation a.button {
   margin-top: 18px;
   font-size: 14px;
 }
+
 #single .tip .split {
   margin: 0 4px;
 }
@@ -393,6 +420,7 @@ nav.navigation a.button {
 #single .tags {
   margin-top: 24px;
 }
+
 #single .tags a {
   background: #f2f2f2;
   padding: 4px 7px;
@@ -400,6 +428,7 @@ nav.navigation a.button {
   font-size: 14px;
   margin-right: 3px;
 }
+
 #single .tags a:hover {
   color: #0366d6;
 }
@@ -416,35 +445,43 @@ nav.navigation a.button {
 }
 
 #archive .group {
-  margin: 24px auto; 
+  margin: 24px auto;
 }
+
 #archive .group .key {
   font-size: 20px;
   margin-bottom: 12px;
 }
+
 #archive .group .value {
   display: block;
   font-size: 16px;
   margin-bottom: 12px;
 }
+
 #archive .group .value .date {
   display: inline-block;
   color: #999;
   min-width: 60px;
 }
+
 #archive .group .value .title {
   display: inline;
 }
+
 #archive .group .value .title a {
-  color:#404040;
+  color: #404040;
 }
+
 #archive .group .value .title a:hover {
   color: #0366d6;
 }
+
 #archive .group .value .tags {
   display: inline;
   margin-left: 7px;
 }
+
 #archive .group .value .tags a {
   background: #f2f2f2;
   padding: 4px 7px;
@@ -452,6 +489,7 @@ nav.navigation a.button {
   font-size: 14px;
   margin-right: 3px;
 }
+
 #archive .group .value .tags a:hover {
   color: #0366d6;
 }
@@ -463,14 +501,17 @@ nav.navigation a.button {
   padding: 0 12px;
   text-align: center;
 }
+
 #tags .tag {
   display: inline-block;
   margin: 7px 7px;
 }
+
 @media (max-width: 700px) {
   #tags {
     margin: 0 auto 0 auto;
   }
+
   #tags .tag {
     display: inline-block;
     margin: 4px 5px;
@@ -485,6 +526,7 @@ nav.navigation a.button {
   font-size: 14px;
   margin-right: 3px;
 }
+
 #tags .tag a:hover {
   color: #0366d6;
 }
@@ -502,6 +544,7 @@ nav.navigation a.button {
   margin: 0 auto;
   padding: 0 24px;
 }
+
 #page-404 .item {
   margin: 12px 0 0 0;
 }
